@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unblock Sigma Bundler</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #111111;
+      color: #e5e5e5;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.6;
+      padding: 48px 20px;
+    }
+
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      font-size: 0.9rem;
+      color: #999999;
+      margin-bottom: 32px;
+    }
+
+    .step {
+      border-top: 1px solid #262626;
+      padding: 20px 0;
+    }
+
+    .step-title {
+      font-size: 1rem;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #cccccc;
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    a:hover {
+      color: #bbbbbb;
+    }
+
+    code {
+      background: #1c1c1c;
+      color: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.85em;
+    }
+
+    .copy-row {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      background: #242424;
+      color: #ffffff;
+      border: 1px solid #3a3a3a;
+      border-radius: 5px;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2f2f2f;
+    }
+
+    .status {
+      font-size: 0.8rem;
+      color: #999999;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Unblock Sigma Bundler</h1>
+    <p class="sub">Only works for your own account.</p>
+
+    <div class="step">
+      <div class="step-title">1. Make an account</div>
+      <p>Go to <a href="https://codehs.com/signup/student" target="_blank" rel="noopener noreferrer">codehs.com/signup/student</a> (Google works).</p>
+    </div>
+
+    <div class="step">
+      <div class="step-title">2. Open the homepage editor</div>
+      <p>Go to <a href="https://codehs.com/editor/sandbox/homepage" target="_blank" rel="noopener noreferrer">codehs.com/editor/sandbox/homepage</a>.</p>
+    </div>
+
+    <div class="step">
+      <div class="step-title">3. Paste into index.html and save</div>
+      <p>Paste this into <code>index.html</code> and hit save.</p>
+      <div class="copy-row">
+        <button type="button" data-url="https://raw.githubusercontent.com/sigmiliarity/bundler2/refs/heads/main/index.html">Copy index.html</button>
+        <span class="status"></span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">4. Create sw.js, paste, and save</div>
+      <p>Make a new file called <code>sw.js</code>, paste this in, and hit save.</p>
+      <div class="copy-row">
+        <button type="button" data-url="https://raw.githubusercontent.com/sigmiliarity/bundler2/refs/heads/main/sw.js">Copy sw.js</button>
+        <span class="status"></span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">5. Open your link</div>
+      <p>Click <code>whateveryourusernameis.codehs.me</code> above the editor.</p>
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll("button[data-url]").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        const status = btn.nextElementSibling;
+        status.textContent = "Copying...";
+        try {
+          const res = await fetch(btn.dataset.url);
+          if (!res.ok) throw new Error();
+          const text = await res.text();
+          await navigator.clipboard.writeText(text);
+          status.textContent = "Copied";
+        } catch {
+          status.textContent = "Failed";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sigma Bundler</title>
+    <style>
+      body {
+        margin: 0;
+        background: #121212;
+        color: #888;
+        font-family: system-ui, sans-serif;
+        font-size: 0.9rem;
+        height: 100vh;
+        display: grid;
+        place-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          window.location.reload();
+        });
+
+        navigator.serviceWorker
+          .register('sw.js')
+          .then((reg) => {
+            if (navigator.serviceWorker.controller) {
+              window.location.reload();
+              return;
+            }
+
+            const sw = reg.installing || reg.waiting || reg.active;
+            if (sw) {
+              if (sw.state === 'activated') {
+                window.location.reload();
+              } else {
+                sw.addEventListener('statechange', () => {
+                  if (sw.state === 'activated') window.location.reload();
+                });
+              }
+            }
+          })
+          .catch((err) => {
+            document.body.textContent = err.message;
+          });
+      } else {
+        document.body.textContent = 'Service workers not supported';
+      }
+    </script>
+  </body>
+</html>

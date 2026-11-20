@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+        <defs>
+          <!-- America 250 palette: crimson red, crisp off-white, and deep navy blue -->
+          <linearGradient id="america250" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#b22234" />
+            <stop offset="28%" stop-color="#c81d25" />
+            <stop offset="48%" stop-color="#f8f9fa" />
+            <stop offset="56%" stop-color="#f8f9fa" />
+            <stop offset="76%" stop-color="#1b365d" />
+            <stop offset="100%" stop-color="#0a2342" />
+          </linearGradient>
+
+          <!-- Organic pen/ink wobble filter for hand-drawn lines -->
+          <filter id="sketch-ink" x="-15%" y="-15%" width="130%" height="130%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="4.5" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+
+          <!-- Lighter secondary pencil pass -->
+          <filter id="pencil-pass" x="-15%" y="-15%" width="130%" height="130%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.06" numOctaves="2" seed="19" result="noise2" />
+            <feDisplacementMap in="SourceGraphic" in2="noise2" scale="6.5" xChannelSelector="G" yChannelSelector="B" />
+          </filter>
+        </defs>
+
+        <!-- Subtle loose pencil oversketch -->
+        <g transform="translate(160 160) scale(2.5) translate(-160 -160)" filter="url(#pencil-pass)" opacity="0.45">
+          <path
+            d="M205.2 117.8h-51.4q-4.6 0-8.2-.4t-7.1-.8q3.9 2.2 7.1 4.5t5.7 5.2l17.5 21.5q1.8 2.1 2.9 3.6t1.7 2.7.8 2.2.2 2q0 1.2-.2 2.4t-.8 2.5-1.8 3-3 3.7l-21.8 26q-2.6 3-4.4 4.7t-3.7 2.8q3.5-.5 6.5-.7t5.5-.2h53.6v17.2h-89.8v-8.4q0-2.4 1.2-4.8t2.8-4.2l36.2-41.6-37.6-43.4q-1.1-1.2-1.8-2.9t-.7-3.3v-9.6h89.8z"
+            fill="none"
+            stroke="#111111"
+            stroke-width="1.1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-dasharray="14 4 22 3 9 5"
+          />
+        </g>
+
+        <!-- Main America 250 sigma + hand-drawn black ink outline -->
+        <g transform="translate(160 160) scale(2.5) translate(-160 -160)" filter="url(#sketch-ink)">
+          <path
+            d="M203.88 118.72h-49.6q-4.4 0-7.92-.32t-6.96-.96q3.84 2 6.92 4.28t5.64 5.08l17.2 21.2q1.76 2 2.84 3.48t1.68 2.64.8 2.12.2 1.92q0 1.12-.16 2.24t-.76 2.44-1.72 2.92-2.88 3.6l-21.28 25.44q-2.56 2.96-4.32 4.6t-3.6 2.76q3.44-.48 6.36-.68t5.4-.2h52.16v16.56h-87.76v-8q0-2.32 1.16-4.68t2.76-4.12l35.6-40.96-37.04-42.72q-1.04-1.2-1.76-2.8t-.72-3.2v-9.2h87.76z"
+            fill="url(#america250)"
+            stroke="#0d0d0d"
+            stroke-width="2.1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </g>
+      </svg>
